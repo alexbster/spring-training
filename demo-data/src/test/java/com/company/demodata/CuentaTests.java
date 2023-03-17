@@ -32,6 +32,7 @@ class CuentaTests {
 		Assert.isTrue(cuenta.getCliente().getApellidos() == "Doe", "Valida apellidos");
 		Assert.isTrue(cuenta.getCliente().getCedula() == "123456789", "Valida cedula");
 		Assert.isTrue(cuenta.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(cliente.getCuentas().size() == 0, "Valida cuentas");
 	}
 
 }

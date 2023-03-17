@@ -1,8 +1,13 @@
 package com.company.demodata.model;
 
 import jakarta.persistence.*;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="cliente")
@@ -10,6 +15,7 @@ import lombok.Setter;
 @Getter
 public class Cliente {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -32,4 +38,28 @@ public class Cliente {
             , length = 11
             , columnDefinition = "varchar(11)")
     private String telefono;
+
+    @OneToMany(mappedBy = "cliente"
+            , cascade = CascadeType.ALL
+            , fetch = FetchType.LAZY
+            , orphanRemoval = true)
+    private List<Direccion> direcciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cliente"
+            , cascade = CascadeType.ALL
+            , fetch = FetchType.LAZY
+            , orphanRemoval = true)
+    private List<Cuenta> cuentas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cliente"
+            , cascade = CascadeType.ALL
+            , fetch = FetchType.LAZY
+            , orphanRemoval = true)
+    private List<Tarjeta> tarjetas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cliente"
+            , cascade = CascadeType.ALL
+            , fetch = FetchType.LAZY
+            , orphanRemoval = true)
+    private List<Inversion> inversiones = new ArrayList<>();
 }

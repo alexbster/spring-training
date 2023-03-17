@@ -32,6 +32,7 @@ class DireccionTests {
 		Assert.isTrue(direccion.getCliente().getApellidos() == "Doe", "Valida apellidos");
 		Assert.isTrue(direccion.getCliente().getCedula() == "123456789", "Valida cedula");
 		Assert.isTrue(direccion.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(cliente.getDirecciones().size() == 0, "Valida direcciones");
 	}
 
 }

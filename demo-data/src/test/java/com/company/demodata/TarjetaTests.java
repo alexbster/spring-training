@@ -32,6 +32,7 @@ class TarjetaTests {
 		Assert.isTrue(tarjeta.getCliente().getApellidos() == "Doe", "Valida apellidos");
 		Assert.isTrue(tarjeta.getCliente().getCedula() == "123456789", "Valida cedula");
 		Assert.isTrue(tarjeta.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(cliente.getTarjetas().size() == 0, "Valida tarjetas");
 	}
 
 }

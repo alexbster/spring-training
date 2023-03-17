@@ -32,6 +32,7 @@ class InversionTests {
 		Assert.isTrue(inversion.getCliente().getApellidos() == "Doe", "Valida apellidos");
 		Assert.isTrue(inversion.getCliente().getCedula() == "123456789", "Valida cedula");
 		Assert.isTrue(inversion.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(cliente.getInversiones().size() == 0, "Valida inversiones");
 	}
 
 }
