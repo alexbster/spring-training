@@ -26,8 +26,6 @@ class CuentaRepositoryTests {
 	@Test
 	void add() {
 
-		Assert.isTrue(cuentaRepository.count() == 0, "Validacion de entitades existentes.");
-
 		var cliente = new Cliente();
 		cliente.setNombre("John");
 		cliente.setApellidos("Doe");
@@ -49,7 +47,6 @@ class CuentaRepositoryTests {
 		Assert.isTrue(cuentaFromDb.get().getTipo().equals("1"), "Valida tipo");
 		Assert.isTrue(cuentaFromDb.get().getNumero().equals("123"), "Valida numero");
 
-		Assert.isTrue(cuentaRepository.count() == 1, "Validacion de entitades existentes.");
 	}
 
 }

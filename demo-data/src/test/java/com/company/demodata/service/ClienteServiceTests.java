@@ -1,16 +1,13 @@
 package com.company.demodata.service;
 
 import com.company.demodata.dto.ClienteDto;
-import com.company.demodata.model.Cliente;
-import com.company.demodata.repository.ClienteRepository;
-import com.company.demodata.service.ClienteService;
+import com.company.demodata.model.Cuenta;
+import com.company.demodata.repository.CuentaRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Fail;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.util.Assert;
 
 @SpringBootTest
@@ -124,5 +121,22 @@ class ClienteServiceTests {
 
 		Assert.isTrue(generatedClient.isEstado(), "Validacion de estado");
 		Assert.isTrue(generatedClient.getTelefono().equals("222"), "Validacion de telefono");
+	}
+
+
+	@Test
+	@Sql({"classpath:datainicial.sql"})
+	void getClientUsingCountryCodeWithActiveAccounts() {
+		var generatedClient = clienteService.getClientUsingCountryCodeWithActiveAccounts("CR");
+		Assert.isTrue(generatedClient.size() == 2, "Validacion de cantidad");
+	}
+
+	@Test
+	@Sql({"classpath:datainicial.sql"})
+	void getClientUsingCountryCodeWithActiveAccountsNotFound() {
+
+		var generatedClient = clienteService.getClientUsingCountryCodeWithActiveAccounts("HN");
+
+		Assert.isTrue(generatedClient.size() == 0, "Validacion de cantidad");
 	}
 }

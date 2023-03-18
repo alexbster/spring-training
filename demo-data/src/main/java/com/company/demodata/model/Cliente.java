@@ -41,6 +41,11 @@ public class Cliente {
 
     private boolean estado;
 
+    @Column(name = "codigoPais"
+            , length = 2
+            , columnDefinition = "varchar(2)")
+    private String codigoPais;
+
     @OneToMany(mappedBy = "cliente"
             , cascade = CascadeType.ALL
             , fetch = FetchType.LAZY

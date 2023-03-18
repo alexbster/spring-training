@@ -4,9 +4,9 @@ import com.company.demodata.dto.ClienteDto;
 import com.company.demodata.model.Cliente;
 import com.company.demodata.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +22,7 @@ public class ClienteService {
         clienteEntity.setCedula(clienteDto.getCedula());
         clienteEntity.setApellidos(clienteDto.getApellidos());
         clienteEntity.setEstado(clienteDto.isEstado());
+        clienteEntity.setCodigoPais(clienteDto.getCodigoPais());
         clienteRepository.save(clienteEntity);
         clienteDto.setId(clienteEntity.getId());
     }
@@ -39,7 +40,28 @@ public class ClienteService {
         clienteDto.setApellidos(clienteEntity.getApellidos());
         clienteDto.setEstado(clienteEntity.isEstado());
         clienteDto.setId(clienteEntity.getId());
+        clienteDto.setCodigoPais(clienteEntity.getCodigoPais());
         return clienteDto;
+    }
+
+    public List<ClienteDto> getClientUsingCountryCodeWithActiveAccounts(String codigoPais)
+    {
+        List<ClienteDto> result = new ArrayList<>();
+        var clienteEntities = clienteRepository.getClientUsingCountryCodeWithActiveAccounts(codigoPais);
+        clienteEntities.forEach(entity ->
+            {
+                var clienteDto = new ClienteDto();
+                clienteDto.setNombre(entity.getNombre());
+                clienteDto.setTelefono(entity.getTelefono());
+                clienteDto.setCedula(entity.getCedula());
+                clienteDto.setApellidos(entity.getApellidos());
+                clienteDto.setEstado(entity.isEstado());
+                clienteDto.setId(entity.getId());
+                clienteDto.setCodigoPais(entity.getCodigoPais());
+                result.add(clienteDto);
+            }
+        );
+        return result;
     }
 
     public ClienteDto updateClient(ClienteDto clienteDto)
@@ -53,6 +75,7 @@ public class ClienteService {
         clienteEntity.setCedula(clienteDto.getCedula());
         clienteEntity.setApellidos(clienteDto.getApellidos());
         clienteEntity.setEstado(clienteDto.isEstado());
+        clienteEntity.setCodigoPais(clienteDto.getCodigoPais());
         clienteRepository.save(clienteEntity);
         return clienteDto;
     }
