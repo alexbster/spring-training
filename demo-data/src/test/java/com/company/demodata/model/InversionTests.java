@@ -1,4 +1,4 @@
-package com.company.demodata;
+package com.company.demodata.model;
 
 import com.company.demodata.model.Cliente;
 import com.company.demodata.model.Inversion;
@@ -25,13 +25,13 @@ class InversionTests {
 		inversion.setCliente(cliente);
 
 		Assert.isTrue(inversion.getId() == 1, "Valida id");
-		Assert.isTrue(inversion.getTipo() == "1", "Valida tipo");
-		Assert.isTrue(inversion.getNumero() == "123", "Valida numero");
+		Assert.isTrue(inversion.getTipo().equals("1"), "Valida tipo");
+		Assert.isTrue(inversion.getNumero().equals("123"), "Valida numero");
 		Assert.isTrue(inversion.getCliente().getId() == 1, "Valida id");
-		Assert.isTrue(inversion.getCliente().getNombre() == "John", "Valida nombre");
-		Assert.isTrue(inversion.getCliente().getApellidos() == "Doe", "Valida apellidos");
-		Assert.isTrue(inversion.getCliente().getCedula() == "123456789", "Valida cedula");
-		Assert.isTrue(inversion.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(inversion.getCliente().getNombre().equals("John"), "Valida nombre");
+		Assert.isTrue(inversion.getCliente().getApellidos().equals("Doe"), "Valida apellidos");
+		Assert.isTrue(inversion.getCliente().getCedula().equals("123456789"), "Valida cedula");
+		Assert.isTrue(inversion.getCliente().getTelefono().equals("12345678"), "Valida telefono");
 		Assert.isTrue(cliente.getInversiones().size() == 0, "Valida inversiones");
 	}
 

@@ -1,4 +1,4 @@
-package com.company.demodata;
+package com.company.demodata.model;
 
 import com.company.demodata.model.Cliente;
 import com.company.demodata.model.Tarjeta;
@@ -25,13 +25,13 @@ class TarjetaTests {
 		tarjeta.setCliente(cliente);
 
 		Assert.isTrue(tarjeta.getId() == 1, "Valida id");
-		Assert.isTrue(tarjeta.getTipo() == "1", "Valida tipo");
-		Assert.isTrue(tarjeta.getNumero() == "123", "Valida numero");
+		Assert.isTrue(tarjeta.getTipo().equals("1"), "Valida tipo");
+		Assert.isTrue(tarjeta.getNumero().equals("123"), "Valida numero");
 		Assert.isTrue(tarjeta.getCliente().getId() == 1, "Valida id");
-		Assert.isTrue(tarjeta.getCliente().getNombre() == "John", "Valida nombre");
-		Assert.isTrue(tarjeta.getCliente().getApellidos() == "Doe", "Valida apellidos");
-		Assert.isTrue(tarjeta.getCliente().getCedula() == "123456789", "Valida cedula");
-		Assert.isTrue(tarjeta.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(tarjeta.getCliente().getNombre().equals("John"), "Valida nombre");
+		Assert.isTrue(tarjeta.getCliente().getApellidos().equals("Doe"), "Valida apellidos");
+		Assert.isTrue(tarjeta.getCliente().getCedula().equals("123456789"), "Valida cedula");
+		Assert.isTrue(tarjeta.getCliente().getTelefono().equals("12345678"), "Valida telefono");
 		Assert.isTrue(cliente.getTarjetas().size() == 0, "Valida tarjetas");
 	}
 

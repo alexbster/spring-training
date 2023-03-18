@@ -39,6 +39,8 @@ public class Cliente {
             , columnDefinition = "varchar(11)")
     private String telefono;
 
+    private boolean estado;
+
     @OneToMany(mappedBy = "cliente"
             , cascade = CascadeType.ALL
             , fetch = FetchType.LAZY

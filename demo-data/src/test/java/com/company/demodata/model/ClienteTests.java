@@ -1,4 +1,4 @@
-package com.company.demodata;
+package com.company.demodata.model;
 
 import com.company.demodata.model.Cliente;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ class ClienteTests {
 		cliente.setTelefono("12345678");
 
 		Assert.isTrue(cliente.getId() == 1, "Valida id");
-		Assert.isTrue(cliente.getNombre() == "John", "Valida nombre");
-		Assert.isTrue(cliente.getApellidos() == "Doe", "Valida apellidos");
-		Assert.isTrue(cliente.getCedula() == "123456789", "Valida cedula");
-		Assert.isTrue(cliente.getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(cliente.getNombre().equals("John"), "Valida nombre");
+		Assert.isTrue(cliente.getApellidos().equals("Doe"), "Valida apellidos");
+		Assert.isTrue(cliente.getCedula().equals("123456789"), "Valida cedula");
+		Assert.isTrue(cliente.getTelefono().equals("12345678"), "Valida telefono");
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.company.demodata;
+package com.company.demodata.model;
 
 import com.company.demodata.model.Cliente;
 import com.company.demodata.model.Direccion;
@@ -25,13 +25,13 @@ class DireccionTests {
 		direccion.setCliente(cliente);
 
 		Assert.isTrue(direccion.getId() == 1, "Valida id");
-		Assert.isTrue(direccion.getDireccion() == "Costa Rica", "Valida direccion");
-		Assert.isTrue(direccion.getNomenclatura() == "CR", "Valida nomenclatura");
+		Assert.isTrue(direccion.getDireccion().equals("Costa Rica"), "Valida direccion");
+		Assert.isTrue(direccion.getNomenclatura().equals("CR"), "Valida nomenclatura");
 		Assert.isTrue(direccion.getCliente().getId() == 1, "Valida id");
-		Assert.isTrue(direccion.getCliente().getNombre() == "John", "Valida nombre");
-		Assert.isTrue(direccion.getCliente().getApellidos() == "Doe", "Valida apellidos");
-		Assert.isTrue(direccion.getCliente().getCedula() == "123456789", "Valida cedula");
-		Assert.isTrue(direccion.getCliente().getTelefono() == "12345678", "Valida telefono");
+		Assert.isTrue(direccion.getCliente().getNombre().equals("John"), "Valida nombre");
+		Assert.isTrue(direccion.getCliente().getApellidos().equals("Doe"), "Valida apellidos");
+		Assert.isTrue(direccion.getCliente().getCedula().equals("123456789"), "Valida cedula");
+		Assert.isTrue(direccion.getCliente().getTelefono().equals("12345678"), "Valida telefono");
 		Assert.isTrue(cliente.getDirecciones().size() == 0, "Valida direcciones");
 	}
 
