@@ -2,9 +2,6 @@ package com.company.demodata.dto;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 public class ClienteDto {
 
@@ -20,5 +17,5 @@ public class ClienteDto {
 
     private boolean estado;
 
-    private String codigoPais;
+    private String paisNacimiento;
 }

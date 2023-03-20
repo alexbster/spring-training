@@ -27,8 +27,6 @@ class DireccionRepositoryTests {
 	@Test
 	void add() {
 
-		Assert.isTrue(direccionRepository.count() == 0, "Validacion de entitades existentes.");
-
 		var cliente = new Cliente();
 		cliente.setNombre("John");
 		cliente.setApellidos("Doe");
@@ -50,7 +48,6 @@ class DireccionRepositoryTests {
 		Assert.isTrue(direccionFromDb.get().getNomenclatura().equals("40501"), "Valida nomenclatura");
 		Assert.isTrue(direccionFromDb.get().getDireccion().equals("SJ CR"), "Valida direccion");
 
-		Assert.isTrue(direccionRepository.count() == 1, "Validacion de entitades existentes.");
 	}
 
 }

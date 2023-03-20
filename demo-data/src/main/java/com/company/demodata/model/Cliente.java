@@ -1,10 +1,8 @@
 package com.company.demodata.model;
 
 import jakarta.persistence.*;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,31 +39,31 @@ public class Cliente {
 
     private boolean estado;
 
-    @Column(name = "codigoPais"
+    @Column(name = "pais_Nacimiento"
             , length = 2
             , columnDefinition = "varchar(2)")
-    private String codigoPais;
+    private String paisNacimiento;
 
     @OneToMany(mappedBy = "cliente"
-            , cascade = CascadeType.ALL
+            //, cascade = CascadeType.ALL
             , fetch = FetchType.LAZY
             , orphanRemoval = true)
     private List<Direccion> direcciones = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente"
-            , cascade = CascadeType.ALL
+            //, cascade = CascadeType.ALL
             , fetch = FetchType.LAZY
             , orphanRemoval = true)
     private List<Cuenta> cuentas = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente"
-            , cascade = CascadeType.ALL
+            //, cascade = CascadeType.ALL
             , fetch = FetchType.LAZY
             , orphanRemoval = true)
     private List<Tarjeta> tarjetas = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente"
-            , cascade = CascadeType.ALL
+            //, cascade = CascadeType.ALL
             , fetch = FetchType.LAZY
             , orphanRemoval = true)
     private List<Inversion> inversiones = new ArrayList<>();

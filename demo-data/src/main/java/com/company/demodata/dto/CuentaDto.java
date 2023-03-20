@@ -10,6 +10,6 @@ public class CuentaDto {
 
     private String tipo;
 
-    private boolean activa;
+    private boolean estado;
 
 }

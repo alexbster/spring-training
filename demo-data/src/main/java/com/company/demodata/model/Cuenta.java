@@ -24,7 +24,7 @@ public class Cuenta {
             , columnDefinition = "varchar(10)")
     private String tipo;
 
-    private boolean activa;
+    private boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
