@@ -5,7 +5,6 @@ import com.company.demodata.model.Cliente;
 import com.company.demodata.repository.ClienteRepository;
 import com.company.demodata.repository.CuentaRepository;
 import com.company.demodata.repository.DireccionRepository;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -115,9 +114,9 @@ public class ClienteService {
         return result;
     }
 
-    public List<ClienteDto> obtieneClientesPorApellido(String apellido){
+    public List<ClienteDto> obtieneClientesPorApellidoQueryLanguage(String apellido){
         List<ClienteDto> result = new ArrayList<>();
-        var clienteEntities = clienteRepository.obtieneClientesPorApellido(apellido);
+        var clienteEntities = clienteRepository.obtieneClientesPorApellidoQueryLanguage(apellido);
         clienteEntities.forEach(entity ->
                 {
                     var clienteDto = new ClienteDto();
@@ -128,6 +127,24 @@ public class ClienteService {
                     clienteDto.setEstado(entity.isEstado());
                     clienteDto.setId(entity.getId());
                     clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                    result.add(clienteDto);
+                }
+        );
+        return result;
+    }
+
+
+    public List<ClienteDto> obtieneClientesPorApellidoQueryLanguageNativeQuery(String apellido){
+        List<ClienteDto> result = new ArrayList<>();
+        var clienteEntities = clienteRepository.obtieneClientesPorApellidoQueryLanguageNativeQuery(apellido);
+        clienteEntities.forEach(entity ->
+                {
+                    var clienteDto = new ClienteDto();
+                    clienteDto.setNombre((String) entity.get("nombre"));
+                    clienteDto.setApellidos((String) entity.get("apellidos"));
+                    clienteDto.setCedula((String) entity.get("cedula"));
+                    clienteDto.setTelefono(entity.get("telefono").toString());
+                    clienteDto.setId((Integer) entity.get("id"));
                     result.add(clienteDto);
                 }
         );

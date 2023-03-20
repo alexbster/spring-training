@@ -1,14 +1,11 @@
 package com.company.demodata.service;
 
 import com.company.demodata.dto.ClienteDto;
-import com.company.demodata.model.Cuenta;
-import com.company.demodata.repository.CuentaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.util.Assert;
 
 @SpringBootTest
@@ -149,9 +146,18 @@ class ClienteServiceTests {
 
 	@Test
 	@Order(9)
-	void obtieneClientesPorApellido() {
+	void obtieneClientesPorApellidoQueryLanguage() {
 
-		var clients = clienteService.obtieneClientesPorApellido("SANCHEZ");
+		var clients = clienteService.obtieneClientesPorApellidoQueryLanguage("SANCHEZ");
+
+		Assert.isTrue(clients.size() == 4, "Validacion de existecias");
+	}
+
+	@Test
+	@Order(10)
+	void obtieneClientesPorApellidoQueryLanguageNativeQuery() {
+
+		var clients = clienteService.obtieneClientesPorApellidoQueryLanguageNativeQuery("SANCHEZ");
 
 		Assert.isTrue(clients.size() == 4, "Validacion de existecias");
 	}

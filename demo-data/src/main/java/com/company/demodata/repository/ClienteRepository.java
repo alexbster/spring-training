@@ -1,6 +1,7 @@
 package com.company.demodata.repository;
 
 import com.company.demodata.model.Cliente;
+import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,8 +12,13 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     public List<Cliente> getClientUsingCountryCodeWithActiveAccounts(String codigoPais);
 
 
+    //Derived methods
     public List<Cliente> findClientesByPaisNacimientoAndCuentas_EstadoIsTrue(String paisNacimiento);
 
-    @Query("SELECT c FROM Cliente c WHERE c.apellidos like %?1%")
-    public List<Cliente> obtieneClientesPorApellido(String apellido);
+    @Query("SELECT c FROM Cliente c WHERE c.apellidos like %:apellido%")
+    public List<Cliente> obtieneClientesPorApellidoQueryLanguage(String apellido);
+
+    @Query(value = "SELECT nombre,apellidos,cedula,telefono,id FROM Cliente WHERE apellidos like %:apellido%"
+    , nativeQuery = true)
+    public List<Tuple> obtieneClientesPorApellidoQueryLanguageNativeQuery(String apellido);
 }
