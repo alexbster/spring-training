@@ -11,4 +11,6 @@ public class TarjetaDto {
 
     private String tipo;
 
+    private boolean estado;
+
 }

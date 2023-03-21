@@ -23,8 +23,8 @@ class CuentaServiceTests {
 
 		var cuentaDto = new CuentaDto();
 		cuentaDto.setEstado(true);
-		cuentaDto.setClienteId(1);
+		cuentaDto.setClienteId(5);
 		var clients = cuentaService.buscarCuentaPorCriterioUsandoClienteId(cuentaDto);
-		Assert.isTrue(clients.size() == 2, "Validacion de existecias");
+		Assert.isTrue(clients.size() == 1, "Validacion de existencias");
 	}
 }

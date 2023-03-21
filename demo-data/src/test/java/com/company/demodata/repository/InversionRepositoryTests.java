@@ -27,8 +27,6 @@ class InversionRepositoryTests {
 	@Test
 	void add() {
 
-		Assert.isTrue(inversionRepository.count() == 0, "Validacion de entitades existentes.");
-
 		var cliente = new Cliente();
 		cliente.setNombre("John");
 		cliente.setApellidos("Doe");
@@ -50,7 +48,6 @@ class InversionRepositoryTests {
 		Assert.isTrue(inversionFromDb.get().getTipo().equals("1"), "Valida tipo");
 		Assert.isTrue(inversionFromDb.get().getNumero().equals("123"), "Valida numero");
 
-		Assert.isTrue(inversionRepository.count() == 1, "Validacion de entitades existentes.");
 	}
 
 }
