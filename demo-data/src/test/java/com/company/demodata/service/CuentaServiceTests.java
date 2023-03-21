@@ -24,7 +24,6 @@ class CuentaServiceTests {
 		var cuentaDto = new CuentaDto();
 		cuentaDto.setEstado(true);
 		cuentaDto.setClienteId(1);
-		cuentaDto.setEstado(true);
 		var clients = cuentaService.buscarCuentaPorCriterioUsandoClienteId(cuentaDto);
 		Assert.isTrue(clients.size() == 2, "Validacion de existecias");
 	}
