@@ -150,4 +150,24 @@ public class ClienteService {
         );
         return result;
     }
+
+
+    public List<ClienteDto> obtieneClientesExtrajerosConTarjetasInactivas(String codigoIsoPaisLocal){
+        List<ClienteDto> result = new ArrayList<>();
+        var clienteEntities = clienteRepository.obtieneClientesExtrajerosConTarjetasInactivas(codigoIsoPaisLocal);
+        clienteEntities.forEach(entity ->
+                {
+                    var clienteDto = new ClienteDto();
+                    clienteDto.setNombre(entity.getNombre());
+                    clienteDto.setTelefono(entity.getTelefono());
+                    clienteDto.setCedula(entity.getCedula());
+                    clienteDto.setApellidos(entity.getApellidos());
+                    clienteDto.setEstado(entity.isEstado());
+                    clienteDto.setId(entity.getId());
+                    clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                    result.add(clienteDto);
+                }
+        );
+        return result;
+    }
 }

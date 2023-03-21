@@ -21,4 +21,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Query(value = "SELECT nombre,apellidos,cedula,telefono,id FROM Cliente WHERE apellidos like %:apellido%"
     , nativeQuery = true)
     public List<Tuple> obtieneClientesPorApellidoQueryLanguageNativeQuery(String apellido);
+
+
+    @Query("SELECT c FROM Cliente c INNER JOIN Tarjeta t ON c = t.cliente WHERE c.paisNacimiento != :codigoPaisLocal AND t.estado = false")
+    public List<Cliente> obtieneClientesExtrajerosConTarjetasInactivas(String codigoPaisLocal);
 }
