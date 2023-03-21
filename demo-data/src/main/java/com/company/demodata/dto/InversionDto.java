@@ -10,4 +10,6 @@ public class InversionDto {
 
     private String tipo;
 
+    private boolean estado;
+
 }

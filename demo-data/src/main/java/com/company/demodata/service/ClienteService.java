@@ -3,9 +3,7 @@ package com.company.demodata.service;
 import com.company.demodata.criteria.ClienteSpecification;
 import com.company.demodata.dto.ClienteDto;
 import com.company.demodata.model.Cliente;
-import com.company.demodata.repository.ClienteRepository;
-import com.company.demodata.repository.CuentaRepository;
-import com.company.demodata.repository.DireccionRepository;
+import com.company.demodata.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +21,10 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
     private DireccionRepository direccionRepository;
     private CuentaRepository cuentaRepository;
+
+    private TarjetaRepository tarjetaRepository;
+
+    private InversionRepository inversionRepository;
 
     private ClienteSpecification clienteSpecification;
 

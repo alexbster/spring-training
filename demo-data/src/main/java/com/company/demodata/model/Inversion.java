@@ -24,6 +24,8 @@ public class Inversion {
             , columnDefinition = "varchar(10)")
     private String tipo;
 
+    private boolean estado;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
