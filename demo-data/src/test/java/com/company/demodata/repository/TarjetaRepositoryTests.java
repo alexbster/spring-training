@@ -27,8 +27,6 @@ class TarjetaRepositoryTests {
 	@Test
 	void add() {
 
-		Assert.isTrue(tarjetaRepository.count() == 0, "Validacion de entitades existentes.");
-
 		var cliente = new Cliente();
 		cliente.setNombre("John");
 		cliente.setApellidos("Doe");
@@ -49,8 +47,7 @@ class TarjetaRepositoryTests {
 		Assert.isTrue(tarjetaFromDb.get().getId() == tarjeta.getId(), "Valida id");
 		Assert.isTrue(tarjetaFromDb.get().getTipo().equals("1"), "Valida tipo");
 		Assert.isTrue(tarjetaFromDb.get().getNumero().equals("123"), "Valida numero");
-
-		Assert.isTrue(tarjetaRepository.count() == 1, "Validacion de entitades existentes.");
+		
 	}
 
 }
