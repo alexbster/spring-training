@@ -179,4 +179,16 @@ class ClienteServiceTests {
 
 		Assert.isTrue(clients.size() == 2, "Validacion de existecias");
 	}
+
+	@Test
+	@Order(13)
+	void buscarClienteDinamicamentePorCriterio() {
+
+		var clienteDto = new ClienteDto();
+		clienteDto.setNombre("JOHN");
+		clienteDto.setCedula("1100");
+		var clients = clienteService.buscarClienteDinamicamentePorCriterio(clienteDto);
+
+		Assert.isTrue(clients.size() == 1, "Validacion de existecias");
+	}
 }

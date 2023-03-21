@@ -3,11 +3,13 @@ package com.company.demodata.repository;
 import com.company.demodata.model.Cliente;
 import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>
+        , JpaSpecificationExecutor<Cliente> {
     @Query("SELECT t FROM Cliente t INNER JOIN Cuenta c ON t = c.cliente WHERE t.paisNacimiento = ?1 AND c.estado")
     public List<Cliente> getClientUsingCountryCodeWithActiveAccounts(String codigoPais);
 

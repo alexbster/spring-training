@@ -1,5 +1,6 @@
 package com.company.demodata.service;
 
+import com.company.demodata.criteria.ClienteSpecification;
 import com.company.demodata.dto.ClienteDto;
 import com.company.demodata.model.Cliente;
 import com.company.demodata.repository.ClienteRepository;
@@ -7,10 +8,12 @@ import com.company.demodata.repository.CuentaRepository;
 import com.company.demodata.repository.DireccionRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,6 +23,8 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
     private DireccionRepository direccionRepository;
     private CuentaRepository cuentaRepository;
+
+    private ClienteSpecification clienteSpecification;
 
     public void insertClient(ClienteDto clienteDto)
     {
@@ -36,18 +41,11 @@ public class ClienteService {
 
     public ClienteDto getClient(int clientId)
     {
-        var clienteEntity = clienteRepository.findById(clientId)
+        var entity = clienteRepository.findById(clientId)
                 .orElseThrow(() -> {
                     throw new RuntimeException("Cliente no existe");
                 });
-        var clienteDto = new ClienteDto();
-        clienteDto.setNombre(clienteEntity.getNombre());
-        clienteDto.setTelefono(clienteEntity.getTelefono());
-        clienteDto.setCedula(clienteEntity.getCedula());
-        clienteDto.setApellidos(clienteEntity.getApellidos());
-        clienteDto.setEstado(clienteEntity.isEstado());
-        clienteDto.setId(clienteEntity.getId());
-        clienteDto.setPaisNacimiento(clienteEntity.getPaisNacimiento());
+        var clienteDto = fromClienteToDto(entity);
         return clienteDto;
     }
 
@@ -57,14 +55,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.getClientUsingCountryCodeWithActiveAccounts(codigoPais);
         clienteEntities.forEach(entity ->
             {
-                var clienteDto = new ClienteDto();
-                clienteDto.setNombre(entity.getNombre());
-                clienteDto.setTelefono(entity.getTelefono());
-                clienteDto.setCedula(entity.getCedula());
-                clienteDto.setApellidos(entity.getApellidos());
-                clienteDto.setEstado(entity.isEstado());
-                clienteDto.setId(entity.getId());
-                clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                var clienteDto = fromClienteToDto(entity);
                 result.add(clienteDto);
             }
         );
@@ -100,14 +91,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.findClientesByPaisNacimientoAndCuentas_EstadoIsTrue(codigoIsoPais);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = new ClienteDto();
-                    clienteDto.setNombre(entity.getNombre());
-                    clienteDto.setTelefono(entity.getTelefono());
-                    clienteDto.setCedula(entity.getCedula());
-                    clienteDto.setApellidos(entity.getApellidos());
-                    clienteDto.setEstado(entity.isEstado());
-                    clienteDto.setId(entity.getId());
-                    clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                    var clienteDto = fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
@@ -119,14 +103,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.obtieneClientesPorApellidoQueryLanguage(apellido);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = new ClienteDto();
-                    clienteDto.setNombre(entity.getNombre());
-                    clienteDto.setTelefono(entity.getTelefono());
-                    clienteDto.setCedula(entity.getCedula());
-                    clienteDto.setApellidos(entity.getApellidos());
-                    clienteDto.setEstado(entity.isEstado());
-                    clienteDto.setId(entity.getId());
-                    clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                    var clienteDto = fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
@@ -157,14 +134,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.obtieneClientesExtrajerosConTarjetasInactivas(codigoIsoPaisLocal);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = new ClienteDto();
-                    clienteDto.setNombre(entity.getNombre());
-                    clienteDto.setTelefono(entity.getTelefono());
-                    clienteDto.setCedula(entity.getCedula());
-                    clienteDto.setApellidos(entity.getApellidos());
-                    clienteDto.setEstado(entity.isEstado());
-                    clienteDto.setId(entity.getId());
-                    clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                    var clienteDto = fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
@@ -176,17 +146,22 @@ public class ClienteService {
         var clienteEntities = clienteRepository.findClientesByPaisNacimientoIsNotAndTarjetas_EstadoIsFalse(codigoIsoPaisLocal);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = new ClienteDto();
-                    clienteDto.setNombre(entity.getNombre());
-                    clienteDto.setTelefono(entity.getTelefono());
-                    clienteDto.setCedula(entity.getCedula());
-                    clienteDto.setApellidos(entity.getApellidos());
-                    clienteDto.setEstado(entity.isEstado());
-                    clienteDto.setId(entity.getId());
-                    clienteDto.setPaisNacimiento(entity.getPaisNacimiento());
+                    var clienteDto = fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
         return result;
+    }
+
+    private ClienteDto fromClienteToDto(Cliente cliente){
+        ClienteDto clienteDto = new ClienteDto();
+        BeanUtils.copyProperties(cliente, clienteDto);
+        return clienteDto;
+    }
+
+    public List<ClienteDto> buscarClienteDinamicamentePorCriterio(ClienteDto clienteDtoFilter)
+    {
+        return clienteRepository.findAll(clienteSpecification.buildFilter(clienteDtoFilter))
+                .stream().map(this::fromClienteToDto).collect(Collectors.toList());
     }
 }

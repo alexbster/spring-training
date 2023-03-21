@@ -47,7 +47,7 @@ class TarjetaRepositoryTests {
 		Assert.isTrue(tarjetaFromDb.get().getId() == tarjeta.getId(), "Valida id");
 		Assert.isTrue(tarjetaFromDb.get().getTipo().equals("1"), "Valida tipo");
 		Assert.isTrue(tarjetaFromDb.get().getNumero().equals("123"), "Valida numero");
-		
+
 	}
 
 }
