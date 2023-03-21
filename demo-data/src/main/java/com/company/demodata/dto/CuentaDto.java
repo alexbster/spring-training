@@ -12,4 +12,6 @@ public class CuentaDto {
 
     private boolean estado;
 
+    private int clienteId;
+
 }
