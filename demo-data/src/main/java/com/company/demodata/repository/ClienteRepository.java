@@ -25,4 +25,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT c FROM Cliente c INNER JOIN Tarjeta t ON c = t.cliente WHERE c.paisNacimiento != :codigoPaisLocal AND t.estado = false")
     public List<Cliente> obtieneClientesExtrajerosConTarjetasInactivas(String codigoPaisLocal);
+
+    public List<Cliente> findClientesByPaisNacimientoIsNotAndTarjetas_EstadoIsFalse(String paisNacimiento);
 }

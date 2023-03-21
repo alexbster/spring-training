@@ -170,4 +170,13 @@ class ClienteServiceTests {
 
 		Assert.isTrue(clients.size() == 2, "Validacion de existecias");
 	}
+
+	@Test
+	@Order(12)
+	void obtieneClientesExtrajerosConTarjetasInactivasDerivedMethod() {
+
+		var clients = clienteService.obtieneClientesExtrajerosConTarjetasInactivasDerivedMethod("CR");
+
+		Assert.isTrue(clients.size() == 2, "Validacion de existecias");
+	}
 }
