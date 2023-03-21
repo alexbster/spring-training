@@ -24,6 +24,6 @@ public class CuentaService {
     public List<CuentaDto> buscarCuentaPorCriterioUsandoClienteId(CuentaDto cuentaDtoFilter)
     {
         return cuentaRepository.findAll(cuentaSpecification.buildFilter(cuentaDtoFilter))
-                .stream().map(e -> Helpers.fromCuentaToDto(e)).collect(Collectors.toList());
+                .stream().map(e -> Helpers.fromSourceToTarget(e, new CuentaDto())).collect(Collectors.toList());
     }
 }

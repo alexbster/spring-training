@@ -11,26 +11,8 @@ import com.company.demodata.model.Tarjeta;
 import org.springframework.beans.BeanUtils;
 
 public class Helpers {
-
-    public static ClienteDto fromClienteToDto(Cliente cliente){
-        ClienteDto clienteDto = new ClienteDto();
-        BeanUtils.copyProperties(cliente, clienteDto);
-        return clienteDto;
-    }
-    public static CuentaDto fromCuentaToDto(Cuenta cuenta){
-        CuentaDto cuentaDto = new CuentaDto();
-        BeanUtils.copyProperties(cuenta, cuentaDto);
-        return cuentaDto;
-    }
-    public static InversionDto fromInversionToDto(Inversion inversion){
-        InversionDto inversionDto = new InversionDto();
-        BeanUtils.copyProperties(inversion, inversionDto);
-        return inversionDto;
-    }
-
-    public static TarjetaDto fromTarjetaToDto(Tarjeta tarjeta){
-        TarjetaDto tarjetaDto = new TarjetaDto();
-        BeanUtils.copyProperties(tarjeta, tarjetaDto);
-        return tarjetaDto;
+    public static <S,T> T fromSourceToTarget(S origen, T destino){
+        BeanUtils.copyProperties(origen, destino);
+        return destino;
     }
 }

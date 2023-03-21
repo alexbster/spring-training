@@ -1,5 +1,6 @@
 package com.company.demodata.service;
 
+import com.company.demodata.dto.CuentaDto;
 import com.company.demodata.dto.TarjetaDto;
 import com.company.demodata.model.Tarjeta;
 import com.company.demodata.repository.TarjetaRepository;
@@ -15,7 +16,7 @@ public class TarjetaService {
 
     TarjetaDto findTarjetaById(int id){
         var tarjeta = tarjetaRepository.findTarjetaById(id);
-        return Helpers.fromTarjetaToDto(tarjeta);
+        return Helpers.fromSourceToTarget(tarjeta, new TarjetaDto());
     }
     void actualizarEstadoUsandoId(int id, boolean estado){
         tarjetaRepository.actualizarEstadoUsandoId(id, estado);
