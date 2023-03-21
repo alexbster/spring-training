@@ -24,12 +24,6 @@ public class CuentaService {
     public List<CuentaDto> buscarCuentaPorCriterioUsandoClienteId(CuentaDto cuentaDtoFilter)
     {
         return cuentaRepository.findAll(cuentaSpecification.buildFilter(cuentaDtoFilter))
-                .stream().map(this::fromCuentaDto).collect(Collectors.toList());
-    }
-
-    private CuentaDto fromCuentaDto(Cuenta cuenta){
-        CuentaDto cuentaDto = new CuentaDto();
-        BeanUtils.copyProperties(cuenta, cuentaDto);
-        return cuentaDto;
+                .stream().map(e -> Helpers.fromCuentaToDto(e)).collect(Collectors.toList());
     }
 }

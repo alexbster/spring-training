@@ -47,7 +47,7 @@ public class ClienteService {
                 .orElseThrow(() -> {
                     throw new RuntimeException("Cliente no existe");
                 });
-        var clienteDto = fromClienteToDto(entity);
+        var clienteDto = Helpers.fromClienteToDto(entity);
         return clienteDto;
     }
 
@@ -57,7 +57,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.getClientUsingCountryCodeWithActiveAccounts(codigoPais);
         clienteEntities.forEach(entity ->
             {
-                var clienteDto = fromClienteToDto(entity);
+                var clienteDto = Helpers.fromClienteToDto(entity);
                 result.add(clienteDto);
             }
         );
@@ -93,7 +93,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.findClientesByPaisNacimientoAndCuentas_EstadoIsTrue(codigoIsoPais);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = fromClienteToDto(entity);
+                    var clienteDto = Helpers.fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
@@ -105,7 +105,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.obtieneClientesPorApellidoQueryLanguage(apellido);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = fromClienteToDto(entity);
+                    var clienteDto = Helpers.fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
@@ -136,7 +136,7 @@ public class ClienteService {
         var clienteEntities = clienteRepository.obtieneClientesExtrajerosConTarjetasInactivas(codigoIsoPaisLocal);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = fromClienteToDto(entity);
+                    var clienteDto = Helpers.fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
@@ -148,22 +148,16 @@ public class ClienteService {
         var clienteEntities = clienteRepository.findClientesByPaisNacimientoIsNotAndTarjetas_EstadoIsFalse(codigoIsoPaisLocal);
         clienteEntities.forEach(entity ->
                 {
-                    var clienteDto = fromClienteToDto(entity);
+                    var clienteDto = Helpers.fromClienteToDto(entity);
                     result.add(clienteDto);
                 }
         );
         return result;
     }
 
-    private ClienteDto fromClienteToDto(Cliente cliente){
-        ClienteDto clienteDto = new ClienteDto();
-        BeanUtils.copyProperties(cliente, clienteDto);
-        return clienteDto;
-    }
-
     public List<ClienteDto> buscarClienteDinamicamentePorCriterio(ClienteDto clienteDtoFilter)
     {
         return clienteRepository.findAll(clienteSpecification.buildFilter(clienteDtoFilter))
-                .stream().map(this::fromClienteToDto).collect(Collectors.toList());
+                .stream().map(e -> Helpers.fromClienteToDto(e)).collect(Collectors.toList());
     }
 }

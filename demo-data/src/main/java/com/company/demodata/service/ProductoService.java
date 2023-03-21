@@ -29,13 +29,13 @@ public class ProductoService {
         var inversiones = inversionRepository.findInversionByClienteIdAndEstadoIsTrue(clienteId);
 
         cuentas.forEach(cuenta -> {
-            result.getCuentas().add(fromCuentaToDto(cuenta));
+            result.getCuentas().add(Helpers.fromCuentaToDto(cuenta));
         });
         tarjetas.forEach(tarjeta -> {
-            result.getTarjetas().add(fromTarjetaToDto(tarjeta));
+            result.getTarjetas().add(Helpers.fromTarjetaToDto(tarjeta));
         });
         inversiones.forEach(inversion -> {
-            result.getInversiones().add(fromInversionToDto(inversion));
+            result.getInversiones().add(Helpers.fromInversionToDto(inversion));
         });
 
         return result;
