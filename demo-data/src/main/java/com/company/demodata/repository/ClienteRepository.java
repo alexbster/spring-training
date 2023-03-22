@@ -29,4 +29,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>
     public List<Cliente> obtieneClientesExtrajerosConTarjetasInactivas(String codigoPaisLocal);
 
     public List<Cliente> findClientesByPaisNacimientoIsNotAndTarjetas_EstadoIsFalse(String paisNacimiento);
+
+    public List<Cliente> findByCedula(String cedula);
+
+    public List<Cliente> findByNombreContainingIgnoreCaseOrApellidosContainingIgnoreCase(String nombre, String apellidos);
 }
