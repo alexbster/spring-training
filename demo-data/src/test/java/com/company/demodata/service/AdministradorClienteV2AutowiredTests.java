@@ -3,37 +3,38 @@ package com.company.demodata.service;
 import com.company.demodata.dto.ClienteDto;
 import com.company.demodata.dto.ClienteQueryDto;
 import com.company.demodata.dto.ClienteQueryType;
-import com.company.demodata.repository.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
+
 /**
  * @author aburgos
- * @since 2023-03-21
+ * @since 2023-03-22
  * @version 1.0
  * @category Test
- * @implSpec Test de la clase AdministradorCliente donde se inyecta el repositorio de clientes
- * por medio del constructor
+ * @implSpec Test de la clase AdministradorClienteV2 donde se inyecta el repositorio de clientes
+ * por medio del constructor y una default a través del constructor también
  */
 @SpringBootTest
 @Slf4j
-public class AdministradorClienteTests {
-
-    @Autowired
-    private ClienteRepository clienteRepository;
+public class AdministradorClienteV2AutowiredTests {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Qualifier("defaultNombres")
+    @Autowired
+    private AdministradorClienteV2 administradorClienteV2ByNames;
+
+    @Autowired
+    private AdministradorClienteV2 defaultCedula;
 
 
     @BeforeEach
@@ -57,43 +58,35 @@ public class AdministradorClienteTests {
     @Test
     void obtieneClientesSinDatos()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("mi texto");
-        consulta.setTipoBusqueda(ClienteQueryType.NOMBRES);
-        var resultado = administradorCliente.obtieneClientes(consulta);
+        var resultado = administradorClienteV2ByNames.obtieneClientes(consulta);
         Assert.isTrue(resultado.size() == 0, "Sin resultados");
     }
     @Test
     void obtieneClientesConNombreExitoso()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("RAUL");
-        consulta.setTipoBusqueda(ClienteQueryType.NOMBRES);
-        var resultado = administradorCliente.obtieneClientes(consulta);
+        var resultado = administradorClienteV2ByNames.obtieneClientes(consulta);
         Assert.isTrue(resultado.size() == 1, "Con resultados");
     }
 
     @Test
     void obtieneClientesConCedulaExitoso()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("1100");
-        consulta.setTipoBusqueda(ClienteQueryType.CEDULA);
-        var resultado = administradorCliente.obtieneClientes(consulta);
+        var resultado = defaultCedula.obtieneClientes(consulta);
         Assert.isTrue(resultado.size() == 1, "Con resultados");
     }
 
     @Test
     void obtieneClientesPreCargadosConCedulaExitoso()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("1890000007");
-        consulta.setTipoBusqueda(ClienteQueryType.CEDULA);
-        var resultado = administradorCliente.obtieneClientes(consulta);
+        var resultado = defaultCedula.obtieneClientes(consulta);
         Assert.isTrue(resultado.size() >= 1, "Con resultados");
     }
 }

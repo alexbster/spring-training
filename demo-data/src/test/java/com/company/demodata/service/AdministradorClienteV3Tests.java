@@ -5,29 +5,26 @@ import com.company.demodata.dto.ClienteQueryDto;
 import com.company.demodata.dto.ClienteQueryType;
 import com.company.demodata.repository.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 /**
  * @author aburgos
- * @since 2023-03-21
+ * @since 2023-03-22
  * @version 1.0
  * @category Test
- * @implSpec Test de la clase AdministradorCliente donde se inyecta el repositorio de clientes
- * por medio del constructor
+ * @implSpec Test de la clase AdministradorClienteV3 donde se inyecta el repositorio de clientes
+ * por medio de setClienteRepository mientras que el defaultType de la consulta se mantiene
+ * a nivel del constructor
  */
 @SpringBootTest
 @Slf4j
-public class AdministradorClienteTests {
+public class AdministradorClienteV3Tests {
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -57,7 +54,8 @@ public class AdministradorClienteTests {
     @Test
     void obtieneClientesSinDatos()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
+        var administradorCliente = new AdministradorClienteV3(ClienteQueryType.NOMBRES);
+        administradorCliente.setClienteRepository(clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("mi texto");
         consulta.setTipoBusqueda(ClienteQueryType.NOMBRES);
@@ -67,7 +65,8 @@ public class AdministradorClienteTests {
     @Test
     void obtieneClientesConNombreExitoso()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
+        var administradorCliente = new AdministradorClienteV3(ClienteQueryType.NOMBRES);
+        administradorCliente.setClienteRepository(clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("RAUL");
         consulta.setTipoBusqueda(ClienteQueryType.NOMBRES);
@@ -78,7 +77,8 @@ public class AdministradorClienteTests {
     @Test
     void obtieneClientesConCedulaExitoso()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
+        var administradorCliente = new AdministradorClienteV3(ClienteQueryType.CEDULA);
+        administradorCliente.setClienteRepository(clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("1100");
         consulta.setTipoBusqueda(ClienteQueryType.CEDULA);
@@ -89,7 +89,8 @@ public class AdministradorClienteTests {
     @Test
     void obtieneClientesPreCargadosConCedulaExitoso()
     {
-        var administradorCliente = new AdministradorCliente(this.clienteRepository);
+        var administradorCliente = new AdministradorClienteV3( ClienteQueryType.CEDULA);
+        administradorCliente.setClienteRepository(clienteRepository);
         var consulta = new ClienteQueryDto();
         consulta.setTextoBusqueda("1890000007");
         consulta.setTipoBusqueda(ClienteQueryType.CEDULA);

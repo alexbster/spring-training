@@ -11,17 +11,21 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class AdministradorClienteV2 {
+public class AdministradorClienteV3 {
 
     private ClienteRepository clienteRepository;
     private ClienteQueryType defaultClienteQueryType;
-    public AdministradorClienteV2(ClienteRepository clienteRepository, ClienteQueryType defaultClienteQueryType)
+    public AdministradorClienteV3(ClienteQueryType defaultClienteQueryType)
     {
-        System.out.println("Inicializando constructor AdministradorClienteV2 " + this);
-
-        this.clienteRepository = clienteRepository;
         this.defaultClienteQueryType = defaultClienteQueryType;
     }
+
+    //Setter of clienteRepository
+    public void setClienteRepository(ClienteRepository clienteRepository)
+    {
+        this.clienteRepository = clienteRepository;
+    }
+
     public List<ClienteDto> obtieneClientes(ClienteQueryDto clienteQueryDto)
     {
         if (clienteQueryDto.getTipoBusqueda() == null) {

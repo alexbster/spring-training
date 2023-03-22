@@ -13,9 +13,18 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+
+/**
+ * @author aburgos
+ * @since 2023-03-21
+ * @version 1.0
+ * @category Test
+ * @implSpec Test de la clase AdministradorClienteV2 donde se inyecta el repositorio de clientes
+ * por medio del constructor y una default a través del constructor también
+ */
 @SpringBootTest
 @Slf4j
-public class AdministradorClienteTestsV2 {
+public class AdministradorClienteV2Tests {
 
     @Autowired
     private ClienteRepository clienteRepository;
