@@ -38,6 +38,7 @@ class CuentaRepositoryTests {
 		cuenta.setTipo("1");
 		cuenta.setNumero("123");
 		cuenta.setCliente(cliente);
+		cuenta.setEstado(true);
 
 		cuentaRepository.save(cuenta);
 
