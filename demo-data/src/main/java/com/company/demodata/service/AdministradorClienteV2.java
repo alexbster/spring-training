@@ -35,11 +35,7 @@ public class AdministradorClienteV2 {
             clientes = this.clienteRepository.findByNombreContainingIgnoreCaseOrApellidosContainingIgnoreCase(clienteQueryDto.getTextoBusqueda(), clienteQueryDto.getTextoBusqueda());
         }
         return Optional.ofNullable(clientes).map(clientesAux-> clientesAux.stream().map(cliente -> {
-            ClienteDto clienteDto = new ClienteDto();
-            clienteDto.setNombre(cliente.getNombre());
-            clienteDto.setApellidos(cliente.getApellidos());
-            clienteDto.setCedula(cliente.getCedula());
-            clienteDto.setTelefono(cliente.getTelefono());
+            var clienteDto = Helpers.fromSourceToTarget(cliente, new ClienteDto());
             return clienteDto;
         }).collect(Collectors.toList())).orElse(new ArrayList<>());
     }

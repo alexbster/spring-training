@@ -191,4 +191,23 @@ class ClienteServiceTests {
 
 		Assert.isTrue(clients.size() == 1, "Validacion de existecias");
 	}
+
+	@Test
+	void insertClientUsingNullName() {
+		var clienteDto = new ClienteDto();
+		//clienteDto.setNombre("Johnny");
+		clienteDto.setApellidos("Doeinng");
+		clienteDto.setCedula("123456789");
+		clienteDto.setTelefono("12345678");
+
+		try{
+			clienteService.insertClient(clienteDto);
+			Assert.isNull(null, "No lanzó excepcion");
+		}
+		catch (jakarta.validation.ConstraintViolationException ex){
+			Assert.isTrue(true, "Validacion de nombre");
+		}
+
+	}
+
 }

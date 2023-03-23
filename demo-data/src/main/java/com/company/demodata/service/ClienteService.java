@@ -2,6 +2,7 @@ package com.company.demodata.service;
 
 import com.company.demodata.criteria.ClienteSpecification;
 import com.company.demodata.dto.ClienteDto;
+import com.company.demodata.dto.ClienteQueryDto;
 import com.company.demodata.model.Cliente;
 import com.company.demodata.repository.*;
 import jakarta.transaction.Transactional;

@@ -1,6 +1,7 @@
 package com.company.demodata.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class Cliente {
     @Column(name = "nombre"
             , length = 50
             , columnDefinition = "varchar(50)")
+    @NotNull(message = "El nombre no puede ser nulo")
     private String nombre;
 
     @Column(name = "apellidos"
