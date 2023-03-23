@@ -24,7 +24,7 @@ public class ProductoService {
     {
         var result = new ResumenProductoDto();
 
-        var cuentas = cuentaRepository.findCuentaByClienteIdAndEstadoIsTrue(clienteId);
+        var cuentas = cuentaRepository.findCuentaByCliente_IdAndEstadoIsTrue(clienteId);
         var tarjetas = tarjetaRepository.findTarjetaByClienteIdAndEstadoIsTrue(clienteId);
         var inversiones = inversionRepository.findInversionByClienteIdAndEstadoIsTrue(clienteId);
 

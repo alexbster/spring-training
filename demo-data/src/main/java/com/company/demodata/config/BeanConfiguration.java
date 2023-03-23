@@ -2,7 +2,9 @@ package com.company.demodata.config;
 
 import com.company.demodata.dto.ClienteQueryType;
 import com.company.demodata.repository.ClienteRepository;
+import com.company.demodata.repository.CuentaRepository;
 import com.company.demodata.service.AdministradorClienteV2;
+import com.company.demodata.service.AdministradorCuenta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +27,9 @@ import org.springframework.web.context.annotation.SessionScope;
 public class BeanConfiguration {
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private CuentaRepository cuentaRepository;
 
     @Bean({"defaultCedula", "criteriaCedula"})
     public AdministradorClienteV2 administradorClienteV2ByCedula() {
