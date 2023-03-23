@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("BuscadorCuentasSistemaExterno")
+@Service("buscadorCuentasSistemaExterno")
 public class BuscadorCuentasSistemaExterno implements BuscadorCuentas {
 
     @Override

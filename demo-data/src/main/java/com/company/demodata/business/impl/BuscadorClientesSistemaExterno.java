@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("BuscadorClientesSistemaExterno")
+@Service("buscadorClientesSistemaExterno")
 public class BuscadorClientesSistemaExterno implements BuscadorClientes {
 
     /**

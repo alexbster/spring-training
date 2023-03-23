@@ -13,10 +13,10 @@ import org.springframework.util.Assert;
 class BuscadorCuentasTest {
 
     @Autowired
-    @Qualifier("BuscadorCuentasBdd")
+    @Qualifier("buscadorCuentasBdd")
     private BuscadorCuentas buscadorCuentasBdd;
     @Autowired
-    @Qualifier("BuscadorCuentasSistemaExterno")
+    @Qualifier("buscadorCuentasSistemaExterno")
     private BuscadorCuentas buscadorCuentasSistemaExterno;
 
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("BuscadorCuentasBdd")
+@Service("buscadorCuentasBdd")
 public class BuscadorCuentasBdd implements BuscadorCuentas {
 
     @Autowired

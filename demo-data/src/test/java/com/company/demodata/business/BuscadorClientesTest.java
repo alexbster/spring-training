@@ -17,11 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class BuscadorClientesTest {
 
     @Autowired
-    @Qualifier("BuscadorClientesBdd")
+    @Qualifier("buscadorClientesBdd")
     private BuscadorClientes buscadorClientesBdd;
 
     @Autowired
-    @Qualifier("BuscadorClientesSistemaExterno")
+    @Qualifier("buscadorClientesSistemaExterno")
     private BuscadorClientes buscadorClientesSistemaExterno;
 
     @Test
