@@ -6,6 +6,7 @@ import com.company.demodata.dto.ClienteDto;
 import com.company.demodata.dto.CuentaDto;
 import com.company.demodata.model.Cliente;
 import com.company.demodata.model.Cuenta;
+import com.company.demodata.repository.ClienteRepository;
 import com.company.demodata.repository.CuentaRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class CuentaService {
+
+    private ClienteRepository clienteRepository;
     private CuentaRepository cuentaRepository;
 
     private CuentaSpecification cuentaSpecification;
@@ -29,13 +32,15 @@ public class CuentaService {
     }
 
     public CuentaDto insertCuenta(CuentaDto cuentaDto) {
-        Cuenta cuenta = new Cuenta();
-        BeanUtils.copyProperties(cuentaDto, cuenta);
+        var cliente = clienteRepository.findById(cuentaDto.getClienteId());
+        if(cliente.isEmpty())
+            return null;
+        var cuenta = Helpers.fromSourceToTarget(cuentaDto, new Cuenta());
+        cuenta.setCliente(cliente.get());
         cuentaRepository.save(cuenta);
         cuentaDto.setId(cuenta.getId());
         return cuentaDto;
     }
-
 
     public CuentaDto disableCuenta(int clienteId, int cuentaId) {
         Cuenta cuenta = cuentaRepository.findCuentaByCliente_IdAndId(clienteId, cuentaId);
