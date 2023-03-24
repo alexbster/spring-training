@@ -52,6 +52,18 @@ public class ClienteService {
         return clienteDto;
     }
 
+    public List<ClienteDto> obtieneTodosLosClientes(){
+        List<ClienteDto> result = new ArrayList<>();
+        var clienteEntities = clienteRepository.findAll();
+        clienteEntities.forEach(entity ->
+            {
+                var clienteDto = Helpers.fromSourceToTarget(entity, new ClienteDto());
+                result.add(clienteDto);
+            }
+        );
+        return result;
+    }
+
     public List<ClienteDto> getClientUsingCountryCodeWithActiveAccounts(String codigoPais)
     {
         List<ClienteDto> result = new ArrayList<>();

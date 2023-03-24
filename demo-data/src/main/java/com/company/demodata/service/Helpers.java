@@ -12,6 +12,8 @@ import org.springframework.beans.BeanUtils;
 
 public class Helpers {
     public static <S,T> T fromSourceToTarget(S origen, T destino){
+        if(origen == null || destino == null)
+            return null;
         BeanUtils.copyProperties(origen, destino);
         return destino;
     }
