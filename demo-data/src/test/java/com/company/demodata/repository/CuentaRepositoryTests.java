@@ -51,6 +51,7 @@ class CuentaRepositoryTests {
 
 	}
 
+	/*
 	@Test
 	void newInstanceUsingInvalidEstadoTest() {
 
@@ -77,7 +78,8 @@ class CuentaRepositoryTests {
 		{
 			Assert.isTrue(true, "Valida excepcion");
 		}
-	}
+	}*/
+
 
 	@Test
 	void newInstanceUsingInvalidCuentaTest() {

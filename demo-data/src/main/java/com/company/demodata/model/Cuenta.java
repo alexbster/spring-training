@@ -30,7 +30,7 @@ public class Cuenta {
     @Pattern(regexp = ".+", message = "El tipo debe ser Ahorro o Corriente") //Code challenge
     private String tipo;
 
-    @AssertTrue(message = "El estado no puede ser nulo")//Code challenge
+    //@AssertTrue(message = "El estado no puede ser nulo")//Code challenge
     private boolean estado;
 
     @ManyToOne

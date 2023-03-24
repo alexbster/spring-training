@@ -17,4 +17,12 @@ public class Helpers {
         BeanUtils.copyProperties(origen, destino);
         return destino;
     }
+
+    public static CuentaDto fromSourceToTarget(Cuenta origen, CuentaDto destino){
+        if(origen == null || destino == null)
+            return null;
+        BeanUtils.copyProperties(origen, destino);
+        destino.setClienteId(origen.getCliente().getId());
+        return destino;
+    }
 }
