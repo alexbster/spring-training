@@ -4,6 +4,7 @@ import com.company.demodata.dto.ClienteDto;
 import com.ctc.wstx.shaded.msv_core.util.Uri;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.company.demodata.service.ClienteService;
@@ -49,5 +50,16 @@ public class ClienteApi {
     public ResponseEntity<ClienteDto> crearCliente(@RequestBody ClienteDto clienteDto) {
         clienteService.insertClient(clienteDto);
         return new ResponseEntity(clienteDto, org.springframework.http.HttpStatus.CREATED);
+    }
+
+    @PutMapping(produces = {"application/xml", "application/json"})
+    public ResponseEntity<ClienteDto> actualizaCliente(@RequestBody ClienteDto clienteDto) {
+        clienteService.updateClient(clienteDto);
+        return new ResponseEntity(clienteDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarClientePorId(@PathVariable int id) {
+        clienteService.deleteClient(id);
     }
 }
