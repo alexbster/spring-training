@@ -2,6 +2,7 @@ package com.company.demodata.api;
 
 import com.company.demodata.dto.ClienteDto;
 import com.ctc.wstx.shaded.msv_core.util.Uri;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,13 +48,13 @@ public class ClienteApi {
     }
 
     @PostMapping(produces = {"application/xml", "application/json"})
-    public ResponseEntity<ClienteDto> crearCliente(@RequestBody ClienteDto clienteDto) {
+    public ResponseEntity<ClienteDto> crearCliente(@Valid @RequestBody ClienteDto clienteDto) {
         clienteService.insertClient(clienteDto);
         return new ResponseEntity(clienteDto, org.springframework.http.HttpStatus.CREATED);
     }
 
     @PutMapping(produces = {"application/xml", "application/json"})
-    public ResponseEntity<ClienteDto> actualizaCliente(@RequestBody ClienteDto clienteDto) {
+    public ResponseEntity<ClienteDto> actualizaCliente(@Valid @RequestBody ClienteDto clienteDto) {
         clienteService.updateClient(clienteDto);
         return new ResponseEntity(clienteDto, HttpStatus.OK);
     }
