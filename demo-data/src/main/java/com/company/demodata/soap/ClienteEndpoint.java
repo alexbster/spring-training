@@ -23,7 +23,7 @@ public class ClienteEndpoint {
         var soapClient = new io.spring.guides.gs_producing_web_service.Cliente();
         soapClient.setId(cliente.getId());
         soapClient.setApellidos(cliente.getApellidos());
-        soapClient.setNombre(cliente.getApellidos());
+        soapClient.setNombre(cliente.getNombre());
         soapClient.setCedula(cliente.getCedula());
         soapClient.setTelefono(cliente.getTelefono());
         soapClient.setPaisNacimiento(cliente.getPaisNacimiento());
