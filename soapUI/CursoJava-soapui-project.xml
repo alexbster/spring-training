@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4e8231c4-6cdc-437b-badc-6622f627596a" activeEnvironment="Default" name="CursoJava" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="8bee75ad-db16-4939-a347-230c5ec23205" wsaVersion="NONE" name="ClientesPortSoap11" type="wsdl" bindingName="{http://spring.io/guides/gs-producing-web-service}ClientesPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:9000/ws/clientes.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:9000/ws/clientes.wsdl"><con:part><con:url>http://localhost:9000/ws/clientes.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://spring.io/guides/gs-producing-web-service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://spring.io/guides/gs-producing-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://spring.io/guides/gs-producing-web-service">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://spring.io/guides/gs-producing-web-service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getClienteRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getClienteResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Cliente" type="tns:Cliente"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="Cliente">
+        <xs:sequence>
+          <xs:element name="id" type="xs:int"/>
+          <xs:element name="nombre" type="xs:string"/>
+          <xs:element name="apellidos" type="xs:string"/>
+          <xs:element name="cedula" type="xs:string"/>
+          <xs:element name="telefono" type="xs:string"/>
+          <xs:element name="paisNacimiento" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getClienteResponse">
+    <wsdl:part element="tns:getClienteResponse" name="getClienteResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getClienteRequest">
+    <wsdl:part element="tns:getClienteRequest" name="getClienteRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ClientesPort">
+    <wsdl:operation name="getCliente">
+      <wsdl:input message="tns:getClienteRequest" name="getClienteRequest"></wsdl:input>
+      <wsdl:output message="tns:getClienteResponse" name="getClienteResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClientesPortSoap11" type="tns:ClientesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCliente">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getClienteRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClientesPortService">
+    <wsdl:port binding="tns:ClientesPortSoap11" name="ClientesPortSoap11">
+      <soap:address location="http://localhost:9000/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9000/ws</con:endpoint></con:endpoints><con:operation id="c83996c0-8c92-4fe6-a712-cd2c2e598313" isOneWay="false" action="" name="getCliente" bindingOperationName="getCliente" type="Request-Response" outputName="getClienteResponse" inputName="getClienteRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0d3ff330-0d84-4e42-a8ee-cd7f2a3fd5f9" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9000/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <gs:getClienteRequest>
+         <gs:id>2</gs:id>
+      </gs:getClienteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://spring.io/guides/gs-producing-web-service/ClientesPort/getClienteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
