@@ -3,6 +3,7 @@ package com.company.demodata;
 import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 import java.sql.SQLException;
@@ -15,6 +16,10 @@ public class DemoDataApplication {
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "stop")
+	@ConditionalOnProperty(
+			prefix = "h2",
+			name="published",
+			havingValue = "true")
 	public Server inMemoryH2DatabaseServer() throws SQLException {
 		return Server.createTcpServer(
 				"-tcp", "-tcpAllowOthers", "-tcpPort", "9090");
