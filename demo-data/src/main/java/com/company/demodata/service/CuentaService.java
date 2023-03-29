@@ -1,16 +1,16 @@
 package com.company.demodata.service;
 
-import com.company.demodata.criteria.ClienteSpecification;
 import com.company.demodata.criteria.CuentaSpecification;
-import com.company.demodata.dto.ClienteDto;
 import com.company.demodata.dto.CuentaDto;
-import com.company.demodata.model.Cliente;
+import com.company.demodata.jms.dto.NotificationDto;
+import com.company.demodata.jms.publisher.NotificationPublisher;
+import com.company.demodata.jms.subscriber.NotificationPubSubSender;
 import com.company.demodata.model.Cuenta;
 import com.company.demodata.repository.ClienteRepository;
 import com.company.demodata.repository.CuentaRepository;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +24,11 @@ public class CuentaService {
     private CuentaRepository cuentaRepository;
 
     private CuentaSpecification cuentaSpecification;
+
+    @Autowired
+    private NotificationPublisher noticationPublisher;
+
+    private NotificationPubSubSender notificationPubSubSender;
 
     public List<CuentaDto> buscarCuentaPorCriterioUsandoClienteId(CuentaDto cuentaDtoFilter)
     {
@@ -39,6 +44,10 @@ public class CuentaService {
         cuenta.setCliente(cliente.get());
         cuentaRepository.save(cuenta);
         cuentaDto.setId(cuenta.getId());
+
+        // Envio de notificacion
+        this.sendNotification(cuentaDto);
+
         return cuentaDto;
     }
 
@@ -56,5 +65,20 @@ public class CuentaService {
         return cuentaRepository.findCuentaByCliente_Id(clienteId)
                 .stream().map(e -> Helpers.fromSourceToTarget(e, new CuentaDto()))
                 .collect(Collectors.toList());
+    }
+
+    private void sendNotification(CuentaDto cuentaDto) {
+
+        clienteRepository.findById(cuentaDto.getClienteId()).ifPresent(cliente -> {
+            var notificationDto = new NotificationDto();
+            notificationDto.setPhoneNumber(cliente.getTelefono());
+            notificationDto.setMessage(String.format("Estimado: %s, se ha creado la cuenta exitosamente.", cliente.getNombre()));
+            noticationPublisher.sendNotification(notificationDto);
+        });
+
+
+        var message = MessageBuilder.withPayload(cuentaDto).build();
+        notificationPubSubSender.sendNotification(message);
+
     }
 }

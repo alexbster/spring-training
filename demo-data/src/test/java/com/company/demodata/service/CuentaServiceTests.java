@@ -27,4 +27,16 @@ class CuentaServiceTests {
 		var clients = cuentaService.buscarCuentaPorCriterioUsandoClienteId(cuentaDto);
 		Assert.isTrue(clients.size() == 1, "Validacion de existencias");
 	}
+
+	@Test
+	void crearCuenta() {
+
+		var cuentaDto = new CuentaDto();
+		cuentaDto.setEstado(true);
+		cuentaDto.setClienteId(1);
+		cuentaDto.setTipo("Ahorro");
+		cuentaDto.setNumero("1234567890009887777");
+		cuentaService.insertCuenta(cuentaDto);
+		Assert.isTrue(cuentaDto.getId() != 0, "Creacion de cuenta");
+	}
 }

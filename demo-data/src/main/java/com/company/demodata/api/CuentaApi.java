@@ -20,7 +20,6 @@ public class CuentaApi {
     @Autowired
     private CuentaService cuentaService;
 
-
     @GetMapping(value = "/cliente/{id}", produces = {"application/xml", "application/json"})
     public ResponseEntity<List<ClienteDto>> obtieneCuentaPorCliente(@PathVariable int id) {
         var cuentas = cuentaService.obtieneCuentasPorCliente(id);
