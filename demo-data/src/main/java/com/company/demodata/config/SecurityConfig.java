@@ -44,6 +44,7 @@ public class SecurityConfig {
         return http.build();
     }*/
 
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .csrf()
@@ -59,8 +60,8 @@ public class SecurityConfig {
                 .authenticated()
                 .and()
                 .oauth2ResourceServer()
-                .jwt();
-        //.jwtAuthenticationConverter(new CustomJwtAuthenticationConverter());
+                .jwt()
+                .jwtAuthenticationConverter(new CustomJwtAuthenticationConverter());
         http.oauth2Login();
         return http.build();
     }
