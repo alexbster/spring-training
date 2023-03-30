@@ -7,5 +7,6 @@
 ## Requisitos externos
 
 - Docker
-- docker run -p 27017:27017 --name mongodb -d mongo
-- docker run -p 8280:8080 --name test-keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.0.1 start-dev
+    - docker run -p 27017:27017 --name mongodb -d mongo
+    - docker run -p 8280:8080 --name test-keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.0.1 start-dev
+
